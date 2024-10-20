@@ -1,43 +1,88 @@
 import { NextAuthConfig } from 'next-auth';
-import CredentialProvider from 'next-auth/providers/credentials';
-import GithubProvider from 'next-auth/providers/github';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 const authConfig = {
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? ''
-    }),
-    CredentialProvider({
+    CredentialsProvider({
+      name: 'Credentials',
       credentials: {
-        email: {
-          type: 'email'
+        phoneNumber: {
+          label: 'Phone Number',
+          type: 'text',
+          placeholder: '+1234567890'
         },
-        password: {
-          type: 'password'
-        }
-      },
-      async authorize(credentials, req) {
-        const user = {
-          id: '1',
-          name: 'John',
-          email: credentials?.email as string
-        };
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
+        password: { label: 'Password', type: 'password' },
 
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        typeL: { label: 'Type', type: 'text', placeholder: 'signIn or signUp' }
+      },
+
+      async authorize(credentials, req) {
+        const { ...rest } = credentials as any;
+
+        // console.log(typeL, rest);
+
+        // console.log('credentials', credentials.typeL);
+
+        const url =
+          credentials.typeL === 'signIn'
+            ? `${process.env.PRODUCTION_API_URL}`
+            : `${process.env.PRODUCTION_API_URL_SIGN_UP}`;
+
+        // console.log('url', url);
+
+        const response = await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        let user: MyUser;
+
+        user = await response.json();
+
+        if (user.result) {
+          return user;
         }
+
+        // throw new Error(user.message ? user.message.join(' ') : 'Unknown error');
+
+        return null;
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+      }
+      return { ...token, ...user };
+    },
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    }
+  },
+
   pages: {
-    signIn: '/' //sigin page
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/auth/error',
+    verifyRequest: '/auth/verify-request'
   }
 } satisfies NextAuthConfig;
 
 export default authConfig;
+
+interface MyUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+
+  userName?: string;
+  token?: string;
+  refreshToken?: string;
+  result?: boolean;
+  message?: string[];
+  isExpired?: boolean;
+}

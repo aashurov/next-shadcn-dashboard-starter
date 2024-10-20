@@ -52,6 +52,7 @@ import { Icons } from '../icons';
 import SearchInput from '../search-input';
 import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
+import { NavItem } from '@/types';
 
 export const company = {
   name: 'Acme Inc',
@@ -60,9 +61,11 @@ export const company = {
 };
 
 export default function AppSidebar({
-  children
+  children,
+  navItems
 }: {
   children: React.ReactNode;
+  navItems: NavItem[];
 }) {
   const [mounted, setMounted] = React.useState(false);
   const { data: session } = useSession();
@@ -161,7 +164,7 @@ export default function AppSidebar({
                   >
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage
-                        src={session?.user?.image || ''}
+                        src={session?.user?.name || ''}
                         alt={session?.user?.name || ''}
                       />
                       <AvatarFallback className="rounded-lg">
@@ -174,7 +177,7 @@ export default function AppSidebar({
                         {session?.user?.name || ''}
                       </span>
                       <span className="truncate text-xs">
-                        {session?.user?.email || ''}
+                        {session?.user?.role || ''}
                       </span>
                     </div>
                     <ChevronsUpDown className="ml-auto size-4" />
@@ -190,7 +193,7 @@ export default function AppSidebar({
                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                       <Avatar className="h-8 w-8 rounded-lg">
                         <AvatarImage
-                          src={session?.user?.image || ''}
+                          src={session?.user?.role || ''}
                           alt={session?.user?.name || ''}
                         />
                         <AvatarFallback className="rounded-lg">
@@ -204,7 +207,7 @@ export default function AppSidebar({
                         </span>
                         <span className="truncate text-xs">
                           {' '}
-                          {session?.user?.email || ''}
+                          {session?.user?.role || ''}
                         </span>
                       </div>
                     </div>

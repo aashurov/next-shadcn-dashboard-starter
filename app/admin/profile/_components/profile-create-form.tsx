@@ -45,9 +45,9 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
-  const title = initialData ? 'Edit product' : 'Create Your Profile';
+  const title = initialData ? 'Edit parcel' : 'Create Your Profile';
   const description = initialData
-    ? 'Edit a product.'
+    ? 'Edit a parcel.'
     : 'To create your resume, we first need some basic information about you.';
   const toastMessage = initialData ? 'Product updated.' : 'Product created.';
   const action = initialData ? 'Save changes' : 'Create';
@@ -89,10 +89,10 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
     try {
       setLoading(true);
       if (initialData) {
-        // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
+        // await axios.post(`/api/products/edit-parcel/${initialData._id}`, data);
       } else {
-        // const res = await axios.post(`/api/products/create-product`, data);
-        // console.log("product", res);
+        // const res = await axios.post(`/api/products/create-parcel`, data);
+        // console.log("parcel", res);
       }
       router.refresh();
       router.push(`/dashboard/products`);

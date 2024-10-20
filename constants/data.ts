@@ -170,3 +170,124 @@ export const navItems: NavItem[] = [
     items: [] // No child items
   }
 ];
+
+export const adminNavItems: NavItem[] = [
+  {
+    title: 'Dashboard',
+    url: '/admin',
+    icon: 'dashboard',
+    label: 'Dashboard',
+    isActive: false,
+    items: [] // Empty array as there are no child items for Dashboard
+  },
+  {
+    title: 'Employee',
+    url: '/admin/employee',
+    icon: 'user',
+    label: 'employee',
+    isActive: false,
+    items: [] // Empty array as there are no child items for Dashboard
+  },
+  {
+    title: 'Product',
+    url: '/admin/package',
+    icon: 'product',
+    label: 'product',
+    isActive: true
+  }
+];
+
+export const customerNavItems: NavItem[] = [
+  {
+    title: 'Главная',
+    url: '/customer',
+    icon: 'dashboard',
+    label: 'Главная'
+  },
+  {
+    title: 'Товары',
+    // href: '/customer/package',
+    url: 'gift',
+    label: 'package',
+    isActive: true,
+    items: [
+      {
+        title: 'Созданные',
+        url: '/customer/package/created',
+        icon: 'money'
+      },
+      {
+        title: 'На складе',
+        url: '/customer/package/inwarehouse',
+        icon: 'money'
+      }
+    ]
+  },
+  {
+    title: 'Посылки',
+    // href: '/customer/parcel',
+    url: 'package',
+    label: 'parcel',
+    isActive: true,
+    items: [
+      {
+        title: 'Созданные',
+        url: '/customer/parcel/created',
+        icon: 'money'
+      },
+      {
+        title: 'В пути',
+        url: '/customer/parcel/intransit',
+        icon: 'money'
+      },
+      {
+        title: 'Прибывшие',
+        url: '/customer/parcel/arrived',
+        icon: 'money'
+      },
+      {
+        title: 'Доставленные',
+        url: '/customer/parcel/delivered',
+        icon: 'money'
+      }
+    ]
+  },
+  {
+    title: 'Адреса',
+    // href: '/customer/address',
+    url: 'mapPin',
+    label: 'address',
+    isActive: true,
+    items: [
+      {
+        title: 'Адреса зарубежом',
+        url: '/customer/foreignaddress',
+        icon: 'globus'
+      },
+      {
+        title: 'Адреса получателя',
+        url: '/customer/customeraddress',
+        icon: 'school'
+      }
+    ]
+  },
+  {
+    title: 'Счета',
+    // href: '/customer/address',
+    url: 'wallet',
+    label: 'wallet',
+    isActive: true,
+    items: [
+      {
+        title: 'Платежи доставка',
+        url: '/customer/deliverypayments',
+        icon: 'money'
+      },
+      {
+        title: 'Платежи выкуп',
+        url: '/customer/ransompayments',
+        icon: 'money'
+      }
+    ]
+  }
+];

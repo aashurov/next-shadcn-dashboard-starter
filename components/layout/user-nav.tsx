@@ -21,7 +21,7 @@ export function UserNav() {
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage
-                src={session.user?.image ?? ''}
+                src={session.user?.role ?? ''}
                 alt={session.user?.name ?? ''}
               />
               <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
@@ -35,7 +35,7 @@ export function UserNav() {
                 {session.user?.name}
               </p>
               <p className="text-xs leading-none text-muted-foreground">
-                {session.user?.email}
+                {session.user?.role}
               </p>
             </div>
           </DropdownMenuLabel>

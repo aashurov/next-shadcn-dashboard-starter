@@ -4,11 +4,14 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  CircleDollarSign,
   CircuitBoardIcon,
   Command,
   CreditCard,
+  Earth,
   File,
   FileText,
+  Gift,
   HelpCircle,
   Image,
   Laptop,
@@ -18,10 +21,13 @@ import {
   LucideIcon,
   LucideProps,
   LucideShoppingBag,
+  MapPin,
   Moon,
   MoreVertical,
+  Package,
   Pizza,
   Plus,
+  School,
   Settings,
   SunMedium,
   Trash,
@@ -30,6 +36,7 @@ import {
   UserCircle2Icon,
   UserPen,
   UserX2Icon,
+  Wallet,
   X
 } from 'lucide-react';
 
@@ -49,7 +56,9 @@ export const Icons = {
   employee: UserX2Icon,
   post: FileText,
   page: File,
+
   userPen: UserPen,
+
   user2: UserCircle2Icon,
   media: Image,
   settings: Settings,
@@ -64,6 +73,14 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  //my added icons
+  mapPin: MapPin,
+  wallet: Wallet,
+  money: CircleDollarSign,
+  globus: Earth,
+  school: School,
+  gift: Gift,
+  package: Package,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

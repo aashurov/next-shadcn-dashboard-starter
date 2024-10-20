@@ -1,17 +1,32 @@
-// Protecting routes with next-auth
-// https://next-auth.js.org/configuration/nextjs#middleware
-// https://nextjs.org/docs/app/building-your-application/routing/middleware
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-import NextAuth from 'next-auth';
-import authConfig from './auth.config';
+export async function middleware(req: NextRequest) {
+  const secret = process.env.NEXTAUTH_SECRET;
+  const token = await getToken({ req, secret });
 
-const { auth } = NextAuth(authConfig);
-
-export default auth((req) => {
-  if (!req.auth) {
-    const url = req.url.replace(req.nextUrl.pathname, '/');
-    return Response.redirect(url);
+  // Redirect if user is not authorized for the admin routes
+  if (
+    req.nextUrl.pathname.startsWith('/admin') &&
+    token?.role !== 'Administrator'
+  ) {
+    return NextResponse.rewrite(
+      new URL('/auth/login?message=You Are Not Authorized!', req.url)
+    );
   }
-});
 
-export const config = { matcher: ['/dashboard/:path*'] };
+  if (
+    req.nextUrl.pathname.startsWith('/customer') &&
+    token?.role !== 'Customer'
+  ) {
+    return NextResponse.rewrite(
+      new URL('/auth/login?message=You Are Not Authorized!', req.url)
+    );
+  }
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/admin/:path*', '/customer/:path*'] // Define the routes that should be protected
+};
