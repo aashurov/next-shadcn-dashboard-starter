@@ -207,8 +207,8 @@ export const customerNavItems: NavItem[] = [
   {
     title: 'Товары',
     url: 'gift',
-    icon: 'package',
-    isActive: true,
+    icon: 'gift',
+    isActive: false,
     items: [
       {
         title: 'Созданные',
@@ -226,7 +226,7 @@ export const customerNavItems: NavItem[] = [
     title: 'Посылки',
     url: 'package',
     icon: 'package',
-    isActive: true,
+    isActive: false,
     items: [
       {
         title: 'Созданные',
@@ -255,7 +255,7 @@ export const customerNavItems: NavItem[] = [
     // href: '/customer/address',
     url: 'mapPin',
     icon: 'mapPin',
-    isActive: true,
+    isActive: false,
     items: [
       {
         title: 'Адреса зарубежом',
@@ -273,7 +273,7 @@ export const customerNavItems: NavItem[] = [
     title: 'Счета',
     url: 'wallet',
     icon: 'wallet',
-    isActive: true,
+    isActive: false,
     items: [
       {
         title: 'Платежи доставка',

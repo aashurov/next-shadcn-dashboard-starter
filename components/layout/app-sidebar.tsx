@@ -33,7 +33,6 @@ import {
   SidebarRail,
   SidebarTrigger
 } from '@/components/ui/sidebar';
-import { navItems } from '@/constants/data';
 import {
   BadgeCheck,
   Bell,
@@ -55,7 +54,7 @@ import { UserNav } from './user-nav';
 import { NavItem } from '@/types';
 
 export const company = {
-  name: 'Acme Inc',
+  name: 'Ethno Logistics',
   logo: GalleryVerticalEnd,
   plan: 'Enterprise'
 };
@@ -95,7 +94,7 @@ export default function AppSidebar({
         </SidebarHeader>
         <SidebarContent className="overflow-x-hidden">
           <SidebarGroup>
-            <SidebarGroupLabel>Overview</SidebarGroupLabel>
+            <SidebarGroupLabel>Управление</SidebarGroupLabel>
             <SidebarMenu>
               {navItems.map((item) => {
                 const Icon = item.icon ? Icons[item.icon] : Icons.logo;
@@ -247,9 +246,9 @@ export default function AppSidebar({
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumbs />
           </div>
-          <div className=" hidden w-1/3 items-center gap-2 px-4 md:flex ">
-            <SearchInput />
-          </div>
+          {/*<div className=" hidden w-1/3 items-center gap-2 px-4 md:flex ">*/}
+          {/*  <SearchInput />*/}
+          {/*</div>*/}
           <div className="flex items-center gap-2 px-4">
             <UserNav />
             <ThemeToggle />

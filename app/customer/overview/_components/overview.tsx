@@ -13,25 +13,43 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { auth } from '@/auth';
+import Link from 'next/link';
 
-export default function OverViewPage() {
+export default async function OverViewPage() {
+  const session = await auth();
+
   return (
     <PageContainer scrollable>
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back 👋
+            Здравствуйте!{' '}
+            {session?.user.fullName ? (
+              session?.user.fullName
+            ) : (
+              <>
+                Статус получателя Не подтверждено. Необходимо подтвердить данные
+                для получения посылки.{' '}
+                <Link href="/confirm-recipient">
+                  <a className="text-blue-500 underline">
+                    Подтвердить получателя
+                  </a>
+                </Link>
+              </>
+            )}{' '}
+            👋
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
             <CalendarDateRangePicker />
-            <Button>Download</Button>
+            <Button>Вызов курьера</Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="overview">Управление</TabsTrigger>
             <TabsTrigger value="analytics" disabled>
-              Analytics
+              Отчеты
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
