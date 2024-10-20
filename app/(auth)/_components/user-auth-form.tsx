@@ -26,7 +26,6 @@ const formSchema = z.object({
   password: z
     .string()
     .min(6, { message: 'Пароль должен быть длиной не менее 6 символов' }),
-  // email: z.string().email({ message: 'Введите действительный адрес электронной почты' }),
   confirmPassword: z.string()
 });
 
