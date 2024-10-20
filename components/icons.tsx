@@ -80,6 +80,7 @@ export const Icons = {
   globus: Earth,
   school: School,
   gift: Gift,
+
   package: Package,
   gitHub: ({ ...props }: LucideProps) => (
     <svg

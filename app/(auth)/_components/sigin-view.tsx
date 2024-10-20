@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Authentication',
-  description: 'Authentication forms built using the components.'
+  description: 'Authentication forms built using the _components.'
 };
 
 export default function SignInViewPage() {
@@ -21,7 +21,7 @@ export default function SignInViewPage() {
       >
         Logins
       </Link>
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+      <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 flex items-center text-lg font-medium">
           <svg

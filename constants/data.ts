@@ -206,9 +206,8 @@ export const customerNavItems: NavItem[] = [
   },
   {
     title: 'Товары',
-    // href: '/customer/package',
     url: 'gift',
-    label: 'package',
+    icon: 'package',
     isActive: true,
     items: [
       {
@@ -225,9 +224,8 @@ export const customerNavItems: NavItem[] = [
   },
   {
     title: 'Посылки',
-    // href: '/customer/parcel',
     url: 'package',
-    label: 'parcel',
+    icon: 'package',
     isActive: true,
     items: [
       {
@@ -256,26 +254,25 @@ export const customerNavItems: NavItem[] = [
     title: 'Адреса',
     // href: '/customer/address',
     url: 'mapPin',
-    label: 'address',
+    icon: 'mapPin',
     isActive: true,
     items: [
       {
         title: 'Адреса зарубежом',
-        url: '/customer/foreignaddress',
+        url: '/customer/address/foreignaddress',
         icon: 'globus'
       },
       {
         title: 'Адреса получателя',
-        url: '/customer/customeraddress',
+        url: '/customer/address/customeraddress',
         icon: 'school'
       }
     ]
   },
   {
     title: 'Счета',
-    // href: '/customer/address',
     url: 'wallet',
-    label: 'wallet',
+    icon: 'wallet',
     isActive: true,
     items: [
       {

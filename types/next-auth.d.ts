@@ -5,7 +5,9 @@ import { DefaultJWT } from 'next-auth/jwt';
 declare module 'next-auth' {
   interface Session {
     user: {
+      userId?: string | null | undefined;
       name?: string | null | undefined;
+      fullName?: string | null | undefined;
       role?: string;
       userName?: string;
       token?: string;

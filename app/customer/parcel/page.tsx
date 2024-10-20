@@ -13,7 +13,7 @@ import ProductListingPage from './_components/product-listing';
 import ProductTableAction from './_components/product-tables/product-table-action';
 
 export const metadata = {
-  title: 'Dashboard: Products'
+  title: 'Dashboard: Parcel'
 };
 
 type pageProps = {
