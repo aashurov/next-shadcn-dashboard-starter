@@ -65,7 +65,7 @@ export default function UserAuthForm() {
       signIn('credentials', {
         phoneNumber: data.phoneNumber.replace(/\s/g, ''),
         password: data.password,
-        redirect: false,
+        redirect: true,
         typeL: 'signIn'
       });
     });
@@ -76,24 +76,24 @@ export default function UserAuthForm() {
       const result = await signIn('credentials', {
         phoneNumber: data.phoneNumber.replace(/\s/g, ''),
         password: data.password,
-        redirect: false,
+        redirect: true,
         typeL: 'signUp'
       });
-      console.error('No response from server.', result);
+      // console.error('No response from server.', result);
       if (result === null) {
         toast('No response from server.');
-        console.error('No response from server.');
+        // console.error('No response from server.');
         return;
       }
 
       if (result?.error) {
-        console.error('Error during registration:', result.error);
+        // console.error('Error during registration:', result.error);
         toast('Unexpected error during registration.');
       } else {
         toast('Event has been created.');
       }
     } catch (error) {
-      console.error('Unexpected error during registration:', error);
+      // console.error('Unexpected error during registration:', error);
       toast('Unexpected error during registration.');
     }
   };

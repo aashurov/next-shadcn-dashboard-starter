@@ -13,14 +13,14 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { data: session } = useSession();
-  const userRole = session?.user?.role;
-  const navItems = userRole === 'admin' ? adminNavItems : customerNavItems;
+  // const { data: session } = useSession();
+  // const userRole = session?.user?.role;
+  // const navItems = userRole === 'admin' ? adminNavItems : customerNavItems;
 
   return (
     <>
       {/*<AppSidebar>{children}</AppSidebar>*/}
-      <AppSidebar navItems={navItems}>{children}</AppSidebar>
+      <AppSidebar navItems={adminNavItems}>{children}</AppSidebar>
     </>
   );
 }
