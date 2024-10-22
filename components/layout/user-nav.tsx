@@ -12,56 +12,61 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { signOut, useSession } from 'next-auth/react';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
+import LocaleSwitcherSelect from '@/components/LocaleSwitcherSelect';
 export function UserNav() {
   const { data: session } = useSession();
   if (session) {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
-              {/*<AvatarImage*/}
-              {/*  src={session.user?.fullName ?? ''}*/}
-              {/*  alt={session.user?.fullName ?? ''}*/}
-              {/*/>*/}
-              <AvatarFallback>{session.user?.fullName?.[0]}</AvatarFallback>
-            </Avatar>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56" align="end" forceMount>
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">
-                {session.user?.fullName}
-              </p>
-              <p className="text-xs leading-none text-muted-foreground">
-                UserId: {session.user?.userId}
-              </p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Профиль
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      <>
+        <LocaleSwitcher />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+              <Avatar className="h-8 w-8">
+                {/*<AvatarImage*/}
+                {/*  src={session.user?.fullName ?? ''}*/}
+                {/*  alt={session.user?.fullName ?? ''}*/}
+                {/*/>*/}
+                <AvatarFallback>{session.user?.fullName?.[0]}</AvatarFallback>
+              </Avatar>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">
+                  {session.user?.fullName}
+                </p>
+                <p className="text-xs leading-none text-muted-foreground">
+                  UserId: {session.user?.userId}
+                </p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                Профиль
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Платежы
+                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Настройки
+                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              {/*<DropdownMenuItem>New Team</DropdownMenuItem>*/}
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+              Выход
+              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              Платежы
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Настройки
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            {/*<DropdownMenuItem>New Team</DropdownMenuItem>*/}
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
-            Выход
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </>
     );
   }
 }
