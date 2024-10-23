@@ -15,9 +15,10 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { useLocale, useTranslations } from 'next-intl';
 
 const formSchema = z.object({
   phoneNumber: z.string().regex(/^\+?[1-9](?:\d\s?){0,14}$/, {
@@ -35,6 +36,11 @@ export default function UserAuthForm() {
   const [loading, startTransition] = useTransition();
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  const t = useTranslations('Login');
+  const r = useTranslations('Register');
+
+  const [isFormLoading, setIsFormLoading] = useState(false);
 
   const formLogin = useForm<UserFormValue>({
     resolver: zodResolver(
@@ -58,51 +64,117 @@ export default function UserAuthForm() {
       }
     }
   }, [status, session, router]);
+  //
+  // const onSubmitLogin = async (data: UserFormValue) => {
+  //   startTransition(() => {
+  //     signIn('credentials', {
+  //       phoneNumber: data.phoneNumber.replace(/\s/g, ''),
+  //       password: data.password,
+  //       redirect: false,
+  //       typeL: 'signIn'
+  //     });
+  //     toast.success('Signed In Successfully!');
+  //   });
+  // };
+
+  // const useLoadingToast = (isFormLoading: boolean) => {
+  //   useEffect(() => {
+  //     let toastId: string | number | null = null;
+  //
+  //     if (isFormLoading) {
+  //       toastId = toast.loading('Loading...');
+  //     } else if (toastId) {
+  //       toast.dismiss(toastId);
+  //     }
+  //     return () => {
+  //       if (toastId) {
+  //         toast.dismiss(toastId);
+  //       }
+  //     };
+  //   }, [isFormLoading]);
+  // };
 
   const onSubmitLogin = async (data: UserFormValue) => {
-    startTransition(() => {
-      signIn('credentials', {
-        phoneNumber: data.phoneNumber.replace(/\s/g, ''),
-        password: data.password,
-        redirect: true,
-        typeL: 'signIn'
-      });
-    });
-  };
-
-  const onSubmitRegister = async (data: UserFormValue) => {
+    // setIsFormLoading(true);
+    const toastId = toast.loading(t('loading'));
     try {
       const result = await signIn('credentials', {
         phoneNumber: data.phoneNumber.replace(/\s/g, ''),
         password: data.password,
-        redirect: true,
-        typeL: 'signUp'
+        redirect: false,
+        typeL: 'signIn'
       });
-      // console.error('No response from server.', result);
-      if (result === null) {
-        toast('No response from server.');
-        // console.error('No response from server.');
-        return;
-      }
 
       if (result?.error) {
-        // console.error('Error during registration:', result.error);
-        toast('Unexpected error during registration.');
+        toast.dismiss(toastId);
+        toast.error(t('error'));
       } else {
-        toast('Event has been created.');
+        toast.dismiss(toastId);
+        toast.success(t('success'));
       }
     } catch (error) {
-      // console.error('Unexpected error during registration:', error);
-      toast('Unexpected error during registration.');
+      toast.dismiss(toastId);
+      toast.error(t('error'));
+    } finally {
+      // setIsFormLoading(false);
     }
   };
+
+  const onSubmitRegister = async (data: UserFormValue) => {
+    setIsFormLoading(true);
+    try {
+      const result = await signIn('credentials', {
+        phoneNumber: data.phoneNumber.replace(/\s/g, ''),
+        password: data.password,
+        redirect: false,
+        typeL: 'signUp'
+      });
+
+      if (result?.error) {
+        toast.error(r('error'));
+      } else {
+        toast.success(r('success'));
+      }
+    } catch (error) {
+      toast.error(r('error'));
+    } finally {
+      setIsFormLoading(false);
+    }
+  };
+
+  // const onSubmitRegister = async (data: UserFormValue) => {
+  //   try {
+  //     const result = await signIn('credentials', {
+  //       phoneNumber: data.phoneNumber.replace(/\s/g, ''),
+  //       password: data.password,
+  //       redirect: true,
+  //       typeL: 'signUp'
+  //     });
+  //     // console.error('No response from server.', result);
+  //     if (result === null) {
+  //       toast('No response from server.');
+  //       // console.error('No response from server.');
+  //       return;
+  //     }
+  //
+  //     if (result?.error) {
+  //       // console.error('Error during registration:', result.error);
+  //       toast('Unexpected error during registration.');
+  //     } else {
+  //       toast('Event has been created.');
+  //     }
+  //   } catch (error) {
+  //     // console.error('Unexpected error during registration:', error);
+  //     toast('Unexpected error during registration.');
+  //   }
+  // };
 
   return (
     <>
       <Tabs defaultValue="login" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">Вход</TabsTrigger>
-          <TabsTrigger value="register">Регистрация</TabsTrigger>
+          <TabsTrigger value="login">{t('title')}</TabsTrigger>
+          <TabsTrigger value="register">{r('title')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="login">
@@ -118,10 +190,10 @@ export default function UserAuthForm() {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Введите номер телефона</FormLabel>
+                        <FormLabel>{t('phoneNumberLabel')}</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Номер телефона"
+                            placeholder={t('phoneNumberInput')}
                             disabled={loading}
                             {...field}
                           />
@@ -135,11 +207,11 @@ export default function UserAuthForm() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Введите пароль</FormLabel>
+                        <FormLabel>{t('passwordLabel')}</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Пароль"
+                            placeholder={t('passwordInput')}
                             disabled={loading}
                             {...field}
                           />
@@ -151,7 +223,7 @@ export default function UserAuthForm() {
                 </CardContent>
                 <CardFooter>
                   <Button disabled={loading} type="submit" className="w-full">
-                    Войти
+                    {t('submit')}
                   </Button>
                 </CardFooter>
               </Card>
@@ -185,10 +257,10 @@ export default function UserAuthForm() {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Введите номер телефона</FormLabel>
+                        <FormLabel>{r('phoneNumberLabel')}</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Номер телефона"
+                            placeholder={r('phoneNumberInput')}
                             disabled={loading}
                             {...field}
                           />
@@ -202,11 +274,11 @@ export default function UserAuthForm() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Введите пароль</FormLabel>
+                        <FormLabel>{r('passwordLabel')}</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Пароль"
+                            placeholder={r('passwordInput')}
                             disabled={loading}
                             {...field}
                           />
@@ -220,11 +292,11 @@ export default function UserAuthForm() {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Подтвердите пароль</FormLabel>
+                        <FormLabel>{r('confirmPasswordLabel')}</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Подтверждение пароля"
+                            placeholder={r('confirmPasswordInput')}
                             disabled={loading}
                             {...field}
                           />
@@ -236,7 +308,7 @@ export default function UserAuthForm() {
                 </CardContent>
                 <CardFooter>
                   <Button disabled={loading} type="submit" className="w-full">
-                    Регистрация
+                    {r('submit')}
                   </Button>
                 </CardFooter>
               </Card>

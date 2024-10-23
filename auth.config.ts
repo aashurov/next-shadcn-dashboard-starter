@@ -18,17 +18,10 @@ const authConfig = {
 
       async authorize(credentials, req) {
         const { ...rest } = credentials as any;
-
-        // console.log(typeL, rest);
-
-        // console.log('credentials', credentials.typeL);
-
         const url =
           credentials.typeL === 'signIn'
             ? `${process.env.PRODUCTION_API_URL}`
             : `${process.env.PRODUCTION_API_URL_SIGN_UP}`;
-
-        // console.log('url', url);
 
         const response = await fetch(url, {
           method: 'POST',
@@ -43,8 +36,6 @@ const authConfig = {
         if (user.result) {
           return user;
         }
-
-        // throw new Error(user.message ? user.message.join(' ') : 'Unknown error');
 
         return null;
       }
@@ -64,7 +55,7 @@ const authConfig = {
   },
 
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/',
     signOut: '/auth/signout',
     error: '/auth/error',
     verifyRequest: '/auth/verify-request'
