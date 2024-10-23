@@ -35,7 +35,6 @@
     "OverViewPageTitle": "Dashboard",
     "OverViewPageDescription": "Dashboard"
   },
-
   "NavItems": {
     "dashboard": "Dashboard",
     "package": {
@@ -88,5 +87,10 @@
     "recentSalesUnder": "You made 265 orders this month.",
     "reportText": "Showing data for the last 3 months",
     "monitoring": "Monitoring"
+  },
+  "BreadCrumbs": {
+    "dashboardTitle": "Dashboard",
+    "employeeTitle": "Employee",
+    "productTitle": "Product"
   }
 }

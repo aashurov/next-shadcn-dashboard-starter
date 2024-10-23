@@ -85,8 +85,13 @@
     "myParcels": "Мои посылки",
     "draft": "Черновые",
     "recentSales": "Последние заказы",
-    "recentSalesUnder": "В этом месяце вы сделали 265 заказов.",
+    "recentSalesUnder": "В этом месяце вы сделали 14 заказов.",
     "reportText": "Показаны данные за последние 3 месяца",
     "monitoring": "Мониторинг"
+  },
+  "BreadCrumbs": {
+    "dashboardTitle": "Панель управления",
+    "employeeTitle": "Сотрудник",
+    "productTitle": "Продукт"
   }
 }
