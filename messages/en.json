@@ -92,5 +92,19 @@
     "dashboardTitle": "Dashboard",
     "employeeTitle": "Employee",
     "productTitle": "Product"
+  },
+  "AvatarMenuTop": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "myPayments": "Payments"
+  },
+  "AvatarMenuBottom": {
+    "profile": "Profile",
+    "account": "Account",
+    "settings": "Settings",
+    "myPayments": "Payments",
+    "logout": "Logout",
+    "notifications": "Notifications"
   }
 }

@@ -93,5 +93,19 @@
     "dashboardTitle": "Панель управления",
     "employeeTitle": "Сотрудник",
     "productTitle": "Продукт"
+  },
+  "AvatarMenuTop": {
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выход",
+    "myPayments": "Платежи"
+  },
+  "AvatarMenuBottom": {
+    "profile": "Профиль",
+    "account": "Аккаунт",
+    "settings": "Настройки",
+    "myPayments": "Платежи",
+    "logout": "Выход",
+    "notifications": "Уведомления"
   }
 }

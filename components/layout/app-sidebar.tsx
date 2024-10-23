@@ -68,6 +68,7 @@ export default function AppSidebar({
   navItems: NavItem[];
 }) {
   const m = useTranslations('MenuTitle');
+  const ml = useTranslations('AvatarMenuBottom');
 
   const [mounted, setMounted] = React.useState(false);
   const { data: session } = useSession();
@@ -179,7 +180,7 @@ export default function AppSidebar({
                         {session?.user?.name || ''}
                       </span>
                       <span className="truncate text-xs">
-                        {session?.user?.role || ''}
+                        {session?.user?.fullName || ''}
                       </span>
                     </div>
                     <ChevronsUpDown className="ml-auto size-4" />
@@ -219,21 +220,21 @@ export default function AppSidebar({
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <BadgeCheck />
-                      Account
+                      {ml('profile')}
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <CreditCard />
-                      Billing
+                      {ml('account')}
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Bell />
-                      Notifications
+                      {ml('notifications')}
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <LogOut />
-                    Log out
+                    {ml('logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

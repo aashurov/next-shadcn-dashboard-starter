@@ -14,8 +14,12 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import LocaleSwitcherSelect from '@/components/LocaleSwitcherSelect';
+import { useTranslations } from 'next-intl';
 export function UserNav() {
   const { data: session } = useSession();
+
+  const t = useTranslations('AvatarMenuTop');
+
   if (session) {
     return (
       <>
@@ -46,22 +50,22 @@ export function UserNav() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                Профиль
+                {t('profile')}
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                Платежы
+                {t('myPayments')}
                 <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                Настройки
+                {t('settings')}
                 <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
               </DropdownMenuItem>
               {/*<DropdownMenuItem>New Team</DropdownMenuItem>*/}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
-              Выход
+              {t('logout')}
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
