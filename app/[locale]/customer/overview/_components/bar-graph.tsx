@@ -16,6 +16,8 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from '@/components/ui/chart';
+import { useTranslations } from 'next-intl';
+import { NavItem } from '@/types';
 
 export const description = 'An interactive bar chart';
 
@@ -113,16 +115,30 @@ const chartData = [
   { date: '2024-06-30', desktop: 446, mobile: 400 }
 ];
 
+// const chartConfig = (t: (key: string) => string): ChartConfig => ({
+//   views: {
+//     label: t('viewsLabel')
+//   },
+//   desktop: {
+//     label: t('desktopLabel'),
+//     color: 'hsl(var(--chart-1))'
+//   },
+//   mobile: {
+//     label: t('mobileLabel'),
+//     color: 'hsl(var(--chart-2))'
+//   }
+// });
+
 const chartConfig = {
   views: {
     label: 'Page Views'
   },
   desktop: {
-    label: 'Desktop',
+    label: 'Goods',
     color: 'hsl(var(--chart-1))'
   },
   mobile: {
-    label: 'Mobile',
+    label: 'Parcels',
     color: 'hsl(var(--chart-2))'
   }
 } satisfies ChartConfig;
@@ -130,6 +146,7 @@ const chartConfig = {
 export function BarGraph() {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>('desktop');
+  const t = useTranslations('OverViewPage');
 
   const total = React.useMemo(
     () => ({
@@ -143,10 +160,8 @@ export function BarGraph() {
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Bar Chart - Interactive</CardTitle>
-          <CardDescription>
-            Showing total visitors for the last 3 months
-          </CardDescription>
+          <CardTitle>{t('monitoring')}</CardTitle>
+          <CardDescription>{t('reportText')}</CardDescription>
         </div>
         <div className="flex">
           {['desktop', 'mobile'].map((key) => {

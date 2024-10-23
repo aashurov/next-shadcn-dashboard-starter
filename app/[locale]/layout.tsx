@@ -3,14 +3,14 @@ import { Lato } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { Toaster } from 'sonner';
 import { auth } from '@/auth';
 import Providers from '@/components/layout/providers';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { setRequestLocale } from 'next-intl/server';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'Ethno Logistics',

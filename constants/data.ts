@@ -1,4 +1,5 @@
 import { NavItem } from '@/types';
+import { useTranslations } from 'next-intl';
 
 export type User = {
   id: number;
@@ -171,117 +172,116 @@ export const navItems: NavItem[] = [
   }
 ];
 
-export const adminNavItems: NavItem[] = [
+export const adminNavItems = (t: (key: string) => string): NavItem[] => [
   {
-    title: 'Dashboard',
+    title: t('dashboard'),
     url: '/admin',
     icon: 'dashboard',
-    label: 'Dashboard',
+    label: t('dashboard'),
     isActive: false,
     items: [] // Empty array as there are no child items for Dashboard
   },
   {
-    title: 'Employee',
+    title: t('employee'),
     url: '/admin/employee',
     icon: 'user',
-    label: 'employee',
+    label: t('employee'),
     isActive: false,
     items: [] // Empty array as there are no child items for Dashboard
   },
   {
-    title: 'Product',
+    title: t('product'),
     url: '/admin/package',
     icon: 'product',
-    label: 'product',
+    label: t('product'),
     isActive: true
   }
 ];
 
-export const customerNavItems: NavItem[] = [
+export const customerNavItems = (t: (key: string) => string): NavItem[] => [
   {
-    title: 'Главная',
+    title: t('dashboard'),
     url: '/customer',
     icon: 'dashboard',
-    label: 'Главная'
+    label: t('dashboard')
   },
   {
-    title: 'Товары',
+    title: t('package.title'),
     url: 'gift',
     icon: 'gift',
     isActive: false,
     items: [
       {
-        title: 'Созданные',
+        title: t('package.subItems.created'),
         url: '/customer/package/created',
         icon: 'money'
       },
       {
-        title: 'На складе',
+        title: t('package.subItems.inwarehouse'),
         url: '/customer/package/inwarehouse',
         icon: 'money'
       }
     ]
   },
   {
-    title: 'Посылки',
+    title: t('parcel.title'),
     url: 'package',
     icon: 'package',
     isActive: false,
     items: [
       {
-        title: 'Созданные',
+        title: t('parcel.subItems.created'),
         url: '/customer/parcel/created',
         icon: 'money'
       },
       {
-        title: 'В пути',
+        title: t('parcel.subItems.intransit'),
         url: '/customer/parcel/intransit',
         icon: 'money'
       },
       {
-        title: 'Прибывшие',
+        title: t('parcel.subItems.arrived'),
         url: '/customer/parcel/arrived',
         icon: 'money'
       },
       {
-        title: 'Доставленные',
+        title: t('parcel.subItems.delivered'),
         url: '/customer/parcel/delivered',
         icon: 'money'
       }
     ]
   },
   {
-    title: 'Адреса',
-    // href: '/customer/address',
+    title: t('address.title'),
     url: 'mapPin',
     icon: 'mapPin',
     isActive: false,
     items: [
       {
-        title: 'Адреса зарубежом',
+        title: t('address.subItems.foreignaddress'),
         url: '/customer/address/foreignaddress',
         icon: 'globus'
       },
       {
-        title: 'Адреса получателя',
+        title: t('address.subItems.customeraddress'),
         url: '/customer/address/customeraddress',
         icon: 'school'
       }
     ]
   },
   {
-    title: 'Счета',
+    title: t('payments.title'),
     url: 'wallet',
     icon: 'wallet',
     isActive: false,
     items: [
       {
-        title: 'Платежи доставка',
+        title: t('payments.subItems.deliverypayments'),
         url: '/customer/deliverypayments',
         icon: 'money'
       },
       {
-        title: 'Платежи выкуп',
+        title: t('payments.subItems.ransompayments'),
         url: '/customer/ransompayments',
         icon: 'money'
       }

@@ -3,11 +3,13 @@ import Link from 'next/link';
 import UserAuthForm from './user-auth-form';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { getTranslations } from 'next-intl/server';
+import { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the _components.'
-};
+// export const metadata: Metadata = {
+//   title: 'Authentication',
+//   description: 'Authentication forms built using the _components.'
+// };
 
 export default function SignInViewPage() {
   return (

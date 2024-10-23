@@ -26,5 +26,67 @@
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {🇷🇺 Русский} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Titles": {
+    "SignInViewPageTitle": "Sign In",
+    "SignInViewPageDescription": "Sign In page for authentication.",
+    "AddressViewPageTitle": "My address",
+    "AddressViewPageDescription": "My address",
+    "OverViewPageTitle": "Dashboard",
+    "OverViewPageDescription": "Dashboard"
+  },
+
+  "NavItems": {
+    "dashboard": "Dashboard",
+    "package": {
+      "title": "Goods",
+      "subItems": {
+        "created": "Created",
+        "inwarehouse": "In warehouse"
+      }
+    },
+    "parcel": {
+      "title": "Parcel",
+      "subItems": {
+        "created": "Created",
+        "intransit": "On way",
+        "arrived": "Arrived",
+        "delivered": "Delivered"
+      }
+    },
+    "address": {
+      "title": "Address",
+      "subItems": {
+        "foreignaddress": "Foreign address",
+        "customeraddress": "Customer address"
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "subItems": {
+        "deliverypayments": "Delivery payments",
+        "ransompayments": "Ransom payments"
+      }
+    }
+  },
+  "MenuTitle": {
+    "title": "Dashboard"
+  },
+  "OverViewPage": {
+    "orderCourierButton": "Order courier",
+    "title": "Dashboard",
+    "reports": "Reports",
+    "hello": "Hello",
+    "confirmUser": "Recipient status is Unconfirmed. You must ensure that the data is correct\n to receive the parcel.",
+    "confirmUserLink": "Confirm user",
+    "myBalance": "My balance",
+    "myBalanceUnder": "from last month",
+    "myGoods": "My goods",
+    "myParcels": "My parcels",
+    "myDraft": "Draft",
+    "recentSales": "Recent orders",
+    "recentSalesUnder": "You made 265 orders this month.",
+    "reportText": "Showing data for the last 3 months",
+    "monitoring": "Monitoring"
   }
 }

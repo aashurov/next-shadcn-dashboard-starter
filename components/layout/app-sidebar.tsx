@@ -52,6 +52,7 @@ import SearchInput from '../search-input';
 import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
 import { NavItem } from '@/types';
+import { useTranslations } from 'next-intl';
 
 export const company = {
   name: 'Ethno Logistics',
@@ -66,6 +67,8 @@ export default function AppSidebar({
   children: React.ReactNode;
   navItems: NavItem[];
 }) {
+  const m = useTranslations('MenuTitle');
+
   const [mounted, setMounted] = React.useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -94,7 +97,7 @@ export default function AppSidebar({
         </SidebarHeader>
         <SidebarContent className="overflow-x-hidden">
           <SidebarGroup>
-            <SidebarGroupLabel>Управление</SidebarGroupLabel>
+            <SidebarGroupLabel>{m('title')}</SidebarGroupLabel>
             <SidebarMenu>
               {navItems.map((item) => {
                 const Icon = item.icon ? Icons[item.icon] : Icons.logo;
@@ -239,6 +242,7 @@ export default function AppSidebar({
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
+
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">

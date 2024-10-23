@@ -13,27 +13,32 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { auth } from '@/auth';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
-export default async function OverViewPage() {
-  const session = await auth();
+interface LoggedUser {
+  fullName: string;
+}
+
+export default function OverViewPage({ user }: { user: LoggedUser }) {
+  // const session = await auth();
+
+  const t = useTranslations('OverViewPage');
 
   return (
     <PageContainer scrollable>
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            Здравствуйте!{' '}
-            {session?.user.fullName ? (
-              session?.user.fullName
+            {t('hello')}!{' '}
+            {user.fullName ? (
+              user.fullName
             ) : (
               <>
-                Статус получателя Не подтверждено. Необходимо подтвердить данные
-                для получения посылки.{' '}
+                {t('confirmUser')}{' '}
                 <Link href="/confirm-recipient">
                   <a className="text-blue-500 underline">
-                    Подтвердить получателя
+                    {t('confirmUserLink')}
                   </a>
                 </Link>
               </>
@@ -42,14 +47,14 @@ export default async function OverViewPage() {
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
             <CalendarDateRangePicker />
-            <Button>Вызов курьера</Button>
+            <Button>{t('orderCourierButton')}</Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">Управление</TabsTrigger>
+            <TabsTrigger value="overview">{t('title')}</TabsTrigger>
             <TabsTrigger value="analytics" disabled>
-              Отчеты
+              {t('reports')}
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
@@ -57,7 +62,7 @@ export default async function OverViewPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total Revenue
+                    {t('myBalance')}
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,16 +78,16 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">$ 0</div>
                   <p className="text-xs text-muted-foreground">
-                    +20.1% from last month
+                    +20.1% {t('myBalanceUnder')}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Subscriptions
+                    {t('myGoods')}
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,15 +105,17 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
+                  <div className="text-2xl font-bold">+2</div>
                   <p className="text-xs text-muted-foreground">
-                    +180.1% from last month
+                    +18.1% {t('myBalanceUnder')}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    {t('myParcels')}
+                  </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -124,16 +131,16 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">+4</div>
                   <p className="text-xs text-muted-foreground">
-                    +19% from last month
+                    +19% {t('myBalanceUnder')}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Active Now
+                    {t('draft')}
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -149,9 +156,9 @@ export default async function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
+                  <div className="text-2xl font-bold">+13</div>
                   <p className="text-xs text-muted-foreground">
-                    +201 since last hour
+                    +8 {t('myBalanceUnder')}
                   </p>
                 </CardContent>
               </Card>
@@ -162,21 +169,19 @@ export default async function OverViewPage() {
               </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>
-                    You made 265 sales this month.
-                  </CardDescription>
+                  <CardTitle>{t('recentSales')}</CardTitle>
+                  <CardDescription>{t('recentSalesUnder')}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <RecentSales />
                 </CardContent>
               </Card>
-              <div className="col-span-4">
-                <AreaGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <PieGraph />
-              </div>
+              {/*<div className="col-span-4">*/}
+              {/*  <AreaGraph />*/}
+              {/*</div>*/}
+              {/*<div className="col-span-4 md:col-span-3">*/}
+              {/*  <PieGraph />*/}
+              {/*</div>*/}
             </div>
           </TabsContent>
         </Tabs>
