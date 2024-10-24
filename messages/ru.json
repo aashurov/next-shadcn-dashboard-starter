@@ -98,7 +98,8 @@
     "profile": "Профиль",
     "settings": "Настройки",
     "logout": "Выход",
-    "myPayments": "Платежи"
+    "myPayments": "Платежи",
+    "copied": "Скопировано в буфер обмена"
   },
   "AvatarMenuBottom": {
     "profile": "Профиль",

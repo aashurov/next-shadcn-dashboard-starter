@@ -15,6 +15,9 @@ import { signOut, useSession } from 'next-auth/react';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import LocaleSwitcherSelect from '@/components/LocaleSwitcherSelect';
 import { useTranslations } from 'next-intl';
+import { Copy } from 'lucide-react';
+import { toast } from 'sonner';
+
 export function UserNav() {
   const { data: session } = useSession();
 
@@ -42,8 +45,33 @@ export function UserNav() {
                 <p className="text-sm font-medium leading-none">
                   {session.user?.fullName}
                 </p>
-                <p className="text-xs leading-none text-muted-foreground">
-                  UserId: {session.user?.userId}
+                <p
+                  className="text-xs leading-none text-muted-foreground"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                >
+                  <strong
+                    onClick={() => {
+                      navigator.clipboard
+                        .writeText(session.user?.userId || '')
+                        .then(() => {});
+                      toast.success(t('copied'));
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    ID: {session.user?.userId}
+                  </strong>
+                  <DropdownMenuShortcut>
+                    <Copy
+                      size={12}
+                      onClick={() => {
+                        navigator.clipboard
+                          .writeText(session.user?.userId || '')
+                          .then((r) => {});
+                        toast.success('Copied to clipboard');
+                      }}
+                      style={{ cursor: 'pointer', marginLeft: '0.5rem' }}
+                    />
+                  </DropdownMenuShortcut>
                 </p>
               </div>
             </DropdownMenuLabel>

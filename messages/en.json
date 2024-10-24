@@ -97,7 +97,8 @@
     "profile": "Profile",
     "settings": "Settings",
     "logout": "Logout",
-    "myPayments": "Payments"
+    "myPayments": "Payments",
+    "copied": "Copied to clipboard"
   },
   "AvatarMenuBottom": {
     "profile": "Profile",
